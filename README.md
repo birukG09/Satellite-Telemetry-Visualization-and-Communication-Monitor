@@ -1,5 +1,5 @@
 Satellite Telemetry Visualization and Communication Monitor
-
+https://github.com/birukG09/Satellite-Telemetry-Visualization-and-Communication-Monitor/blob/3d353fcf4ebb293e6c6ac7299db18d98736b8337/Screenshot%202025-07-09%20044051.png
 Real-time satellite tracking meets cyberpunk aesthetics.
 
 🚀 Project Overview
@@ -35,7 +35,7 @@ Console and Filters
 
 🛠️ Tech Stack
 Layer	Technology
-Backend	Java / C++ (Actix-web, Crow)
+Backend	Js (Actix-web, Crow)
 Database	PostgreSQL with PostGIS
 Frontend	React + CesiumJS + Leaflet.js
 Real-time	WebSocket
