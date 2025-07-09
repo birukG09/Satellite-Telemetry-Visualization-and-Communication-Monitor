@@ -1,0 +1,140 @@
+{
+  "project_name": "Cyberpunk Real-Time Satellite Tracker",
+  "description": "A full-stack application that tracks satellites in real time using TLE data, stores satellite and telemetry data in a database, and displays a cyberpunk-themed 3D globe and 2D map with neon green/black hacker console style UI. Includes API endpoints, live updates, filters, and detailed satellite info.",
+  
+  "goal": "Build a performant, visually stunning real-time satellite tracking system with cyberpunk aesthetics, advanced data management, and interactive UI suitable for 4K displays.",
+
+  "tech_stack": {
+    "backend": {
+      "language": "Java or C++",
+      "framework": {
+        "Java": "Spring Boot or Quarkus for REST API and WebSocket support",
+        "C++": "Crow or Pistache for REST API, with WebSocket library such as WebSocket++"
+      },
+      "database": "PostgreSQL with PostGIS extension for geospatial queries",
+      "real_time": "WebSocket for live updates",
+      "data_source": ["Fetch TLE data from Celestrak, NORAD APIs"],
+      "orbital_model": "SGP4 algorithm for satellite position calculation"
+    },
+    "frontend": {
+      "framework": "Vanilla JS or React",
+      "visualization": ["CesiumJS for 3D globe", "Leaflet.js for 2D map"],
+      "styling": "TailwindCSS with custom cyberpunk green/black theme"
+    },
+    "deployment": ["Docker containers", "Replit for prototyping", "Cloud hosting (AWS/GCP/Azure)"]
+  },
+
+  "database_schema": {
+    "satellites": {
+      "fields": {
+        "id": "Primary key, unique satellite identifier",
+        "name": "Satellite name",
+        "norad_id": "NORAD catalog number",
+        "type": "Satellite type (e.g., GPS, Starlink, GEO)",
+        "country": "Country of origin",
+        "tle_line1": "First line of TLE data",
+        "tle_line2": "Second line of TLE data",
+        "launch_date": "Date of launch",
+        "orbit_class": "Orbit classification (LEO, MEO, GEO)"
+      }
+    },
+    "telemetry": {
+      "fields": {
+        "id": "Primary key",
+        "satellite_id": "Foreign key referencing satellites.id",
+        "timestamp": "UTC timestamp",
+        "latitude": "Degrees",
+        "longitude": "Degrees",
+        "altitude_km": "Altitude above Earth surface in km",
+        "velocity_km_s": "Velocity in km/s"
+      },
+      "indexes": ["timestamp", "satellite_id", "geospatial index on latitude/longitude"]
+    }
+  },
+
+  "api_endpoints": {
+    "/api/satellites": "GET: List satellites with filtering (type, orbit, country)",
+    "/api/satellite/{id}": "GET: Get satellite metadata and latest telemetry",
+    "/api/telemetry/{satellite_id}": "GET: Fetch recent telemetry data",
+    "/api/position/{satellite_id}": "GET: Get real-time position (lat, lon, alt)",
+    "/api/visibility": "POST: Calculate visible satellites for given location and time",
+    "/ws/updates": "WebSocket: Stream live telemetry updates"
+  },
+
+  "frontend_features": {
+    "visual_style": {
+      "colors": {
+        "background": "#000000",
+        "glow": "#00FF00",
+        "accent": "#39FF14"
+      },
+      "effects": [
+        "neon green glow",
+        "pulse animations",
+        "animated connections between points",
+        "scanlines overlay"
+      ],
+      "fonts": ["Share Tech Mono", "Orbitron", "monospace"]
+    },
+    "map_globe_features": {
+      "3D_globe": {
+        "library": "CesiumJS or Three.js",
+        "style": "Black oceans, glowing green satellite markers, animated orbit trails",
+        "animations": "Satellite orbits with trailing paths and pulsing markers",
+        "lighting": "Dark ambient with green rim lighting"
+      },
+      "2D_map": {
+        "library": "Leaflet.js with dark tile layer (CartoDB Dark Matter or Mapbox Dark)",
+        "markers": "Bright green glowing points for satellites",
+        "connections": "Animated green lines representing satellite links or orbits"
+      }
+    },
+    "layout": {
+      "panels": [
+        "Top info bar with app title, real-time UTC clock, and system status",
+        "Left sidebar with satellite filters (type, orbit, country)",
+        "Main center panel for 3D globe / 2D map toggle",
+        "Right sidebar with selected satellite details and telemetry charts",
+        "Bottom console log panel for real-time events and alerts"
+      ],
+      "interactive_elements": [
+        "Hover tooltips on satellites showing name, orbit, speed",
+        "Click satellites to open detailed modal with telemetry graphs",
+        "Toggle switch for 2D/3D view",
+        "Search bar for satellite name or NORAD ID"
+      ]
+    },
+    "user_experience": {
+      "animations": "Smooth pulsing, orbit trails, glowing connection lines",
+      "responsive": "Full 4K support with high DPI scaling",
+      "performance": "Efficient rendering using WebGL and data throttling",
+      "accessibility": "Keyboard navigation and screen reader support"
+    }
+  },
+
+  "advanced_features": [
+    "Offline mode with cached TLE and telemetry data",
+    "Satellite pass prediction and notification system",
+    "Ground station coverage and communication window visualization",
+    "Simulated inter-satellite network with routing visualization",
+    "Historical telemetry playback with time slider",
+    "Export telemetry and satellite data as CSV or JSON",
+    "User accounts with saved preferences and watchlists"
+  ],
+
+  "documentation": {
+    "README": "Comprehensive project overview, setup guide, API docs, architecture diagram",
+    "diagrams": ["System architecture", "Database ER diagram", "Frontend component tree"],
+    "demo_media": ["Animated GIFs of orbit visualization", "Video walkthrough"],
+    "license": "MIT or Apache 2.0"
+  },
+
+  "deployment": {
+    "strategy": [
+      "Use Docker for containerized backend and frontend",
+      "Deploy backend API on AWS/GCP/Azure with managed PostgreSQL",
+      "Host frontend on CDN or GitHub Pages",
+      "Set up CI/CD pipeline with GitHub Actions for testing and deployment"
+    ]
+  }
+}

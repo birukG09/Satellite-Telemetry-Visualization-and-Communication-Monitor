@@ -1,0 +1,57 @@
+{
+  "feature_name": "Cyberpunk Live Satellite Threat Map",
+  "visual_style": {
+    "base_colors": {
+      "background": "#000000",
+      "primary_glow": "#00FF00",
+      "accent_glow": "#39FF14"
+    },
+    "effects": ["neon glow", "pulsing markers", "animated connecting arcs", "scanline overlays"],
+    "fonts": ["Orbitron", "Share Tech Mono"]
+  },
+  "3D_globe_module": {
+    "library": "CesiumJS",
+    "surface_style": "Dark globe with glowing green continents and markers",
+    "animations": {
+      "attack_arcs": "Animated arcs between coordinates",
+      "rotating_globe": true,
+      "marker_pulse": "Satellite or threat point pulses"
+    },
+    "interactions": ["Hover tooltips", "Click to select", "Globe zoom/rotate"]
+  },
+  "2D_map_module": {
+    "library": "Mapbox GL JS or Leaflet.js",
+    "tile_style": "Dark matter theme with glowing neon overlays",
+    "visuals": ["Lines/arcs animate between source and destination", "Heatmap for intense events"],
+    "interactions": ["Click for details", "Filters by event type or country"]
+  },
+  "data_layers": {
+    "real_time_attacks": true,
+    "satellite_positions": true,
+    "communication_paths": true,
+    "threat_links": true
+  },
+  "console_panel": {
+    "type": "Hacker-style terminal bar",
+    "feeds": ["Real-time telemetry", "Attack events log", "System diagnostics"],
+    "appearance": "Flickering neon green text, auto-scroll"
+  },
+  "ui_layout": {
+    "sections": [
+      "Top nav with live UTC clock and system status",
+      "Left panel with filter controls",
+      "Main viewport toggling between 3D globe and 2D map",
+      "Right panel with stats and event summaries",
+      "Bottom console log area"
+    ],
+    "controls": ["Toggle 2D/3D", "Select threat type", "Search by satellite or country"]
+  },
+  "performance": {
+    "4k_ready": true,
+    "optimize": "Throttle updates for smooth animation, WebGL acceleration"
+  },
+  "backend_integration": {
+    "api_endpoints": ["/api/attacks", "/api/satellites", "/ws/live-stream"],
+    "data_format": "GeoJSON or streaming JSON events"
+  }
+}

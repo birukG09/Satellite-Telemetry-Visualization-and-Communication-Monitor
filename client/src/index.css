@@ -1,0 +1,416 @@
+@import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono:wght@400&family=Orbitron:wght@400;700;900&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: hsl(0, 0%, 0%);
+  --foreground: hsl(120, 100%, 50%);
+  --muted: hsl(120, 20%, 10%);
+  --muted-foreground: hsl(120, 30%, 40%);
+  --popover: hsl(0, 0%, 0%);
+  --popover-foreground: hsl(120, 100%, 50%);
+  --card: hsl(0, 0%, 0%);
+  --card-foreground: hsl(120, 100%, 50%);
+  --border: hsl(120, 50%, 25%);
+  --input: hsl(120, 50%, 25%);
+  --primary: hsl(120, 100%, 50%);
+  --primary-foreground: hsl(0, 0%, 0%);
+  --secondary: hsl(120, 20%, 10%);
+  --secondary-foreground: hsl(120, 100%, 50%);
+  --accent: hsl(120, 100%, 60%);
+  --accent-foreground: hsl(0, 0%, 0%);
+  --destructive: hsl(0, 84.2%, 60.2%);
+  --destructive-foreground: hsl(60, 9.1%, 97.8%);
+  --ring: hsl(120, 100%, 50%);
+  --radius: 0.5rem;
+  
+  /* Cyberpunk specific colors */
+  --cyber-black: hsl(0, 0%, 0%);
+  --cyber-green: hsl(120, 100%, 50%);
+  --cyber-lime: hsl(77, 100%, 57%);
+  --cyber-green-dark: hsl(120, 100%, 40%);
+  --cyber-green-darker: hsl(120, 100%, 27%);
+  --cyber-border: hsl(120, 100%, 13%);
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply font-mono antialiased bg-background text-foreground;
+    font-family: 'Share Tech Mono', monospace;
+    background: var(--cyber-black);
+    color: var(--cyber-green);
+  }
+}
+
+@layer components {
+  .cyber-panel {
+    background: linear-gradient(135deg, rgba(0,255,0,0.1) 0%, rgba(0,0,0,0.9) 100%);
+    border: 1px solid var(--cyber-green);
+    box-shadow: inset 0 0 10px rgba(0,255,0,0.2), 0 0 20px rgba(0,255,0,0.3);
+  }
+  
+  .cyber-button {
+    background: linear-gradient(45deg, rgba(0,255,0,0.1), rgba(0,255,0,0.2));
+    border: 1px solid var(--cyber-green);
+    box-shadow: 0 0 10px rgba(0,255,0,0.3);
+    transition: all 0.3s ease;
+    color: var(--cyber-green);
+  }
+  
+  .cyber-button:hover {
+    background: linear-gradient(45deg, rgba(0,255,0,0.2), rgba(0,255,0,0.3));
+    box-shadow: 0 0 20px rgba(0,255,0,0.6);
+    text-shadow: 0 0 10px var(--cyber-green);
+  }
+  
+  .console-text {
+    color: var(--cyber-green-dark);
+    text-shadow: 0 0 5px var(--cyber-green);
+  }
+  
+  .globe-container {
+    background: radial-gradient(circle at center, #001100 0%, #000000 70%);
+  }
+  
+  .satellite-marker {
+    width: 8px;
+    height: 8px;
+    background: var(--cyber-green);
+    border-radius: 50%;
+    box-shadow: 0 0 10px var(--cyber-green), 0 0 20px var(--cyber-green);
+    animation: pulse-glow 1.5s ease-in-out infinite alternate;
+  }
+  
+  .scanlines {
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .scanlines::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: repeating-linear-gradient(
+      90deg,
+      transparent,
+      transparent 2px,
+      rgba(0,255,0,0.03) 2px,
+      rgba(0,255,0,0.03) 4px
+    );
+    pointer-events: none;
+    z-index: 1;
+  }
+  
+  .scanlines::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 2px;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, var(--cyber-green), transparent);
+    animation: scanline 3s linear infinite;
+    z-index: 2;
+  }
+}
+
+@layer utilities {
+  .text-cyber-green {
+    color: var(--cyber-green);
+  }
+  
+  .text-cyber-lime {
+    color: var(--cyber-lime);
+  }
+  
+  .text-cyber-green-dark {
+    color: var(--cyber-green-dark);
+  }
+  
+  .text-cyber-green-darker {
+    color: var(--cyber-green-darker);
+  }
+  
+  .bg-cyber-black {
+    background-color: var(--cyber-black);
+  }
+  
+  .border-cyber-border {
+    border-color: var(--cyber-border);
+  }
+  
+  .border-cyber-green {
+    border-color: var(--cyber-green);
+  }
+  
+  .font-orbitron {
+    font-family: 'Orbitron', monospace;
+  }
+  
+  .font-cyber {
+    font-family: 'Share Tech Mono', monospace;
+  }
+}
+
+@keyframes pulse-glow {
+  from { 
+    box-shadow: 0 0 5px var(--cyber-green), 0 0 10px var(--cyber-green), 0 0 15px var(--cyber-green); 
+  }
+  to { 
+    box-shadow: 0 0 10px var(--cyber-green), 0 0 20px var(--cyber-green), 0 0 30px var(--cyber-green); 
+  }
+}
+
+@keyframes scanline {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100vw); }
+}
+
+@keyframes glow {
+  from { 
+    text-shadow: 0 0 5px var(--cyber-green), 0 0 10px var(--cyber-green); 
+  }
+  to { 
+    text-shadow: 0 0 10px var(--cyber-green), 0 0 20px var(--cyber-green), 0 0 30px var(--cyber-green); 
+  }
+}
+
+@keyframes flicker {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.8; }
+}
+
+@keyframes pulse-line {
+  0%, 100% { opacity: 0.3; }
+  50% { opacity: 0.8; }
+}
+
+.animate-glow {
+  animation: glow 1.5s ease-in-out infinite alternate;
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 2s ease-in-out infinite alternate;
+}
+
+.animate-scanline {
+  animation: scanline 2s linear infinite;
+}
+
+.animate-flicker {
+  animation: flicker 0.1s infinite linear alternate;
+}
+
+/* Leaflet map styling for cyberpunk theme */
+.leaflet-container {
+  background: #000000 !important;
+  font-family: 'Share Tech Mono', monospace !important;
+}
+
+.leaflet-control-zoom a {
+  background-color: rgba(0, 0, 0, 0.8) !important;
+  border: 1px solid var(--cyber-green) !important;
+  color: var(--cyber-green) !important;
+  box-shadow: 0 0 10px rgba(0, 255, 0, 0.3) !important;
+}
+
+.leaflet-control-zoom a:hover {
+  background-color: rgba(0, 255, 0, 0.1) !important;
+  color: var(--cyber-lime) !important;
+  box-shadow: 0 0 15px rgba(0, 255, 0, 0.5) !important;
+}
+
+.leaflet-popup-content-wrapper {
+  background: var(--cyber-black) !important;
+  border: 1px solid var(--cyber-green) !important;
+  color: var(--cyber-green) !important;
+  box-shadow: 0 0 20px rgba(0, 255, 0, 0.3) !important;
+}
+
+.leaflet-popup-tip {
+  background: var(--cyber-black) !important;
+  border: 1px solid var(--cyber-green) !important;
+}
+
+/* Custom marker animations */
+.satellite-marker-leaflet {
+  animation: pulse-glow 2s infinite alternate !important;
+}
+
+.communication-link {
+  animation: pulse-line 3s infinite linear !important;
+}
+
+/* Custom scrollbar for better cyberpunk feel */
+.custom-scrollbar::-webkit-scrollbar,
+.console-scrollbar::-webkit-scrollbar {
+  width: 4px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track,
+.console-scrollbar::-webkit-scrollbar-track {
+  background: rgba(0, 255, 0, 0.1);
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb,
+.console-scrollbar::-webkit-scrollbar-thumb {
+  background: var(--cyber-green);
+  border-radius: 2px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover,
+.console-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: var(--cyber-lime);
+}
+
+/* Console specific styling */
+.console-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: var(--cyber-green) rgba(0, 255, 0, 0.1);
+}
+
+/* Enhanced satellite marker animations */
+.satellite-marker-enhanced {
+  animation: satellite-pulse 2s infinite ease-in-out;
+}
+
+.satellite-glow {
+  animation: glow-pulse 3s infinite ease-in-out;
+}
+
+.satellite-direction-icon {
+  animation: rotate-direction 4s infinite linear;
+}
+
+@keyframes satellite-pulse {
+  0%, 100% { 
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% { 
+    transform: scale(1.2);
+    opacity: 0.8;
+  }
+}
+
+@keyframes glow-pulse {
+  0%, 100% { 
+    opacity: 0.1;
+    transform: scale(1);
+  }
+  50% { 
+    opacity: 0.3;
+    transform: scale(1.1);
+  }
+}
+
+@keyframes rotate-direction {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* Enhanced leaflet popup styling */
+.cyber-popup-container .leaflet-popup-content-wrapper {
+  background: rgba(0, 0, 0, 0.95) !important;
+  border: 2px solid var(--cyber-green) !important;
+  border-radius: 8px !important;
+  box-shadow: 0 0 20px rgba(0, 255, 0, 0.4) !important;
+}
+
+.cyber-popup-container .leaflet-popup-tip {
+  background: rgba(0, 0, 0, 0.95) !important;
+  border: 2px solid var(--cyber-green) !important;
+  box-shadow: 0 0 10px rgba(0, 255, 0, 0.3) !important;
+}
+
+.cyber-popup {
+  color: var(--cyber-green);
+  font-family: 'Share Tech Mono', monospace;
+}
+
+/* Enhanced leaflet controls */
+.cyber-controls {
+  background: rgba(0, 0, 0, 0.9) !important;
+  border: 1px solid var(--cyber-green) !important;
+  border-radius: 8px !important;
+  box-shadow: 0 0 15px rgba(0, 255, 0, 0.3) !important;
+}
+
+.cyber-checkbox {
+  accent-color: var(--cyber-green);
+  background: var(--cyber-black);
+  border: 1px solid var(--cyber-green);
+}
+
+/* Advanced orbit trail animations */
+.orbit-trail {
+  animation: orbit-flow 4s infinite linear;
+}
+
+@keyframes orbit-flow {
+  0% { stroke-dashoffset: 0; }
+  100% { stroke-dashoffset: 20; }
+}
+
+/* Communication link animations */
+.communication-link {
+  animation: data-flow 2s infinite linear;
+}
+
+@keyframes data-flow {
+  0% { stroke-dashoffset: 0; }
+  100% { stroke-dashoffset: 10; }
+}
+
+/* Enhanced leaflet container */
+.leaflet-cyber-container {
+  background: #000000 !important;
+  border: 2px solid var(--cyber-green);
+  border-radius: 8px;
+  box-shadow: 
+    0 0 20px rgba(0, 255, 0, 0.3),
+    inset 0 0 20px rgba(0, 255, 0, 0.1);
+}
+
+/* Three.js globe enhancements */
+.globe-container canvas {
+  border: 2px solid var(--cyber-green);
+  border-radius: 8px;
+  box-shadow: 
+    0 0 30px rgba(0, 255, 0, 0.4),
+    inset 0 0 30px rgba(0, 255, 0, 0.1);
+}
+
+/* Enhanced threat level indicators */
+.threat-indicator-high {
+  color: #ff3333;
+  animation: threat-flash 1s infinite alternate;
+}
+
+.threat-indicator-medium {
+  color: #ffaa00;
+  animation: threat-pulse 2s infinite ease-in-out;
+}
+
+.threat-indicator-low {
+  color: var(--cyber-green);
+}
+
+@keyframes threat-flash {
+  0% { opacity: 0.7; }
+  100% { opacity: 1; }
+}
+
+@keyframes threat-pulse {
+  0%, 100% { opacity: 0.8; }
+  50% { opacity: 1; }
+}
